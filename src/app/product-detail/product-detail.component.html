@@ -1,14 +1,21 @@
 <!-- seperat Page for product details, rating should be possible -->
 
-<div *ngIf="product">
+<div class="product" *ngIf="product">
 
     <h2>{{product.title | uppercase}} Details</h2>
-    <div><span>id: </span>{{product.id}}</div>
-    <div><span>tags: </span>{{product.tags}}</div>
-    <div><span>description: </span>{{product.description}}</div>
-    <div>
-        <label for="product-tag">Product Tag (change to review): </label>
-        <input id="product-tag" [(ngModel)]="product.tags" placeholder="add tag">
-    </div>
+        <div class="details"><span class="badge">Id: </span>{{product.id}}</div>
+        <div class="details"><span class="badge">Description: </span>{{product.description}}</div>
+        <div class="details"><span class="badge">Price: </span>{{product.price | currency}}</div>
+        <div class="details"><span class="badge"> Like count:</span> {{product.likes_count}}</div>
+        <div class="details"><span class="badge"> Dislike count:</span> {{product.dislikes_count}}</div>
+        <!-- <span>getRating() <img src="../../assets/star.png"></span> -->
+        <div class="details"><button (click)="like(product)">+</button></div>
+        <div class="details"><button (click)="dislike(product)">-</button></div>
+
+        <div class="details" ><span class="badge">Tags: </span>{{product.tags}}</div>
+        <div class="details">
+            <label for="product-tag">Product Tag (change to review): </label>
+            <input id="product-tag" [(ngModel)]="product.tags" placeholder="add tag">
+        </div>
 
 </div>

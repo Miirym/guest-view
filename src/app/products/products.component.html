@@ -13,13 +13,13 @@
 
 <h2>Menu from mock-products</h2>
 <ul class="products">
-  <li *ngFor="let product of products" [class.selected]="product === selectedProduct" (click)="onSelect(product)">
+  <li *ngFor="let product of products" >
     <span class="badge">{{product.id}}</span>
-    <span>{{product.title | uppercase}} </span>
-      <span>{{product.price | currency}}, Likecount: {{product.likes_count}}</span>
+    <span [class.selected]="product === selectedProduct" (click)="onSelect(product)">{{product.title | uppercase}} </span>
+      <span>{{product.price | currency}}</span>
     <!-- <span>getRating() <img src="../../assets/star.png"></span> -->
-      <button (click)="like(product)">+</button>
-      <button (click)="dislike(product)">-</button>
+      <button >+</button>
+      <button >-</button>
   
   </li>
 </ul>

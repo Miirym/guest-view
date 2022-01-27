@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from '../product';
-import { PRODUCTS } from '../mock-products';
+import { ProductService } from '../product.service';
+import { MessageService } from '../message.service';
 
 
 @Component({
@@ -15,30 +16,38 @@ export class ProductsComponent implements OnInit {
   //   price: 1234,
   //   description: 'much champignons, very delicious'
   // };
-  products = PRODUCTS;
+
+  products: Product[] = []
   selectedProduct?: Product;
 
-  constructor() { }
+  constructor(private productService: ProductService, private messageService: MessageService) { }
 
   ngOnInit(): void {
+    this.getProducts();
   }
 
   // click event handler
   onSelect(product: Product): void {
     this.selectedProduct = product;
+    this.messageService.add(`ProductComponent: Selected product id=${product.id}`);
   }
 
-like(product: Product){
-  product.likes_count?product.likes_count++:1;
-}
+  // retrieve products array from service asynchronusly
+  getProducts(): void {
+    this.productService.getProducts().subscribe(products => this.products = products);
+  }
 
-dislike(product: Product){
-  product.dislikes_count?product.dislikes_count++:1;
-  console.log(product.dislikes_count);
-}
+  // order methodes should be implemented
+  // order(product: Product){
+  //   ordercount += ordercount;
+  // }
 
-// rating(product: Product){
-//   return Math.round(product.likes_count&&product.dislikes_count?((product.likes_count/(product.likes_count+product.dislikes_count))*0.2);
-// }
+  // remove(product: Product){
+  //   ordercount -= ordercount;
+  // }
+
+  // rating(product: Product){
+  //   return Math.round(product.likes_count&&product.dislikes_count?((product.likes_count/(product.likes_count+product.dislikes_count))*0.2);
+  // }
 
 }

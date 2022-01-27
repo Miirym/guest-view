@@ -17,5 +17,13 @@ export class ProductDetailComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
+  
+  like(product: Product){
+    product.likes_count?product.likes_count++:1;
+  }
+  
+  dislike(product: Product){
+    product.dislikes_count?product.dislikes_count++:1;
+    console.log(product.dislikes_count);
+  }
 }
