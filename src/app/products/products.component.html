@@ -1,0 +1,43 @@
+<!-- old Code from Tour of Heros with product out of an json-format file 
+  
+  <h2>{{product.name | uppercase}} Details</h2>
+<div><span>id: </span>{{product.id}}</div>
+<div><span>name: </span>{{product.name}}</div>
+<div><span>price: </span>{{product.price | currency}}</div>
+<div><span>description: </span>{{product.description}}</div>
+<div>
+    <label for="name">Product name: </label>
+    <input id="review" [(ngModel)]="product.review" placeholder="review">
+  </div> -->
+
+
+<h2>Menu from mock-products</h2>
+<ul class="products">
+  <li *ngFor="let product of products" [class.selected]="product === selectedProduct" (click)="onSelect(product)">
+    <span class="badge">{{product.id}}</span>
+    <span>{{product.title | uppercase}} </span>
+      <span>{{product.price | currency}}, Likecount: {{product.likes_count}}</span>
+    <!-- <span>getRating() <img src="../../assets/star.png"></span> -->
+      <button (click)="like(product)">+</button>
+      <button (click)="dislike(product)">-</button>
+  
+  </li>
+</ul>
+
+<!-- angular property binding [product]="selectedProduct" - parent/child relationship -->
+<app-product-detail [product]="selectedProduct"></app-product-detail>
+
+
+<!-- <div *ngIf="selectedProduct">
+<h2>{{selectedProduct.title | uppercase}} Details</h2>
+<div><span>id: </span>{{selectedProduct.id}}</div>
+<div><span>tags: </span>{{selectedProduct.tags}}</div>
+<div><span>description: </span>{{selectedProduct.description}}</div>
+<div>
+  <label for="product-tag">Product Tag (change to review): </label>
+  <input id="product-tag" [(ngModel)]="selectedProduct.tags" placeholder="add tag">
+</div>
+</div> -->
+
+
+
