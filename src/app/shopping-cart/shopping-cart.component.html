@@ -1,0 +1,6 @@
+<h2>Shopping Cart</h2>
+<div class="item">
+  <a *ngFor="let product of products" routerLink="/detail/{{product.id}}">
+    {{product.title}}
+  </a>
+</div>

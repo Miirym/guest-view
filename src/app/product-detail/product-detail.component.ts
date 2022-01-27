@@ -1,5 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
+
 import { Product } from '../product';
+import { ProductService } from '../product.service';
 
 @Component({
   selector: 'app-product-detail',
@@ -10,12 +14,18 @@ import { Product } from '../product';
 
 
 export class ProductDetailComponent implements OnInit {
-  //receive product property
-  @Input() product?: Product;
+  product: Product| undefined;
   
-  constructor() { }
+  constructor(  private route: ActivatedRoute, private productService: ProductService, private location: Location) { }
 
   ngOnInit(): void {
+    this.getProduct();
+  }
+
+  getProduct(): void {
+    const id = Number(this.route.snapshot.paramMap.get('id'));
+    this.productService.getProduct(id)
+      .subscribe(product => this.product = product);
   }
   
   like(product: Product){
@@ -25,5 +35,9 @@ export class ProductDetailComponent implements OnInit {
   dislike(product: Product){
     product.dislikes_count?product.dislikes_count++:1;
     console.log(product.dislikes_count);
+  }
+
+  goBack(): void {
+    this.location.back();
   }
 }
